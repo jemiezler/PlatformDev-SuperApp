@@ -34,11 +34,9 @@ jobs:
         run: |
           cd backend/gem_cars
           pnpm install
-          cd ../frontend/admin
+          cd frontend/admin
           pnpm install
-          cd ../user
-          pnpm install
-          cd ../shared
+          cd frontend/user
           pnpm install
 
   test:
@@ -50,7 +48,6 @@ jobs:
           - backend/gem_cars
           - frontend/admin
           - frontend/user
-          - frontend/shared
 
     steps:
       - name: Checkout code
