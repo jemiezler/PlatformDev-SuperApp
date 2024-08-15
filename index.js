@@ -8,12 +8,14 @@ const path = require('path');
 const program = new Command();
 
 const defaultPorts = {
-  gem_cars: 8080,
-  // backend2: 8081,
+  auth: 8080,
+  gem_cars: 8081,
   admin: 3000,
   user: 3001,
   shared: 3002,
 };
+
+const backend = ['auth', 'gem_cars']
 
 // Function to create .env files with user-defined or default ports and MongoDB URIs
 async function createEnvFiles() {
@@ -29,45 +31,37 @@ async function createEnvFiles() {
     validate: input => !isNaN(parseInt(input, 10)) ? true : 'Please enter a valid number.'
   }));
 
-  // Prompt user for MongoDB URIs for each backend
-  const mongoUriQuestions = ['gem_cars'].map(backend => ({
+  // Prompt user for MongoDB URIs for backend services
+  const mongoUriQuestions = backend.map(backend => ({
     type: 'input',
     name: backend,
-    message: `Enter MongoDB URI for ${backend}:`,
+    message: `Enter MongoDB URI for ${backend} (default mongodb://localhost:27017/${backend}-db):`,
     default: `mongodb://localhost:27017/${backend}-db`,
   }));
-  // const mongoUriQuestions = ['gem_cars', 'backend2'].map(backend => ({
-  //   type: 'input',
-  //   name: backend,
-  //   message: `Enter MongoDB URI for ${backend}:`,
-  //   default: `mongodb://localhost:27017/${backend}-db`,
-  // }));
-  
-  const answers = await inquirer.prompt([...portQuestions, ...mongoUriQuestions]);
+
+  const answers = await inquirer.prompt([...portQuestions]);
+  const mongoanswers = await inquirer.prompt([...mongoUriQuestions]);
 
   Object.keys(defaultPorts).forEach(service => {
     const port = answers[service] || defaultPorts[service];
     ports[service] = parseInt(port, 10);
-    let envFilePath;
-    let backendPath = path.join('./backend', service);
 
-    if (fs.existsSync(backendPath)) {
-      envFilePath = path.join(backendPath, '.env');
-      mongoUris[service] = answers[service];
+    let envFilePath;
+    let envContent = `PORT=${ports[service]}`;
+
+    // Determine if service is a backend and assign MongoDB URI if necessary
+    if (backend.includes(service)) {
+      envFilePath = path.join('./backend', service, '.env');
+      envContent += `\nMONGO_URI=${mongoanswers[service]}`;
     } else {
       envFilePath = path.join('./frontend', service, '.env');
     }
 
-
     // Ensure the directory exists before creating the .env file
     fs.mkdirSync(path.dirname(envFilePath), { recursive: true });
 
-    let envContent = `PORT=${ports[service]}`;
-    if (service.startsWith('backend')) {
-      envContent += `\nMONGODB_URI=${mongoUris[service]}`;
-    }
     fs.writeFileSync(envFilePath, envContent, { encoding: 'utf8' });
-    console.log(`Created .env file for ${service} with PORT=${ports[service]}`);
+    console.log(`Created .env file for ${service} with PORT=${ports[service]}${backend.includes(service) ? ` and MONGO_URI=${answers[service]}` : ''}`);
   });
 }
 
@@ -127,14 +121,14 @@ function promptServiceSelection() {
 
 // Define services
 const services = {
-  gem_cars: {
-    command: 'cd backend/gem_cars && pnpm run start:dev',
+  auth: {
+    command: 'cd backend/auth && go run cmd/main.go',
     port: 8080
   },
-  // backend2: {
-  //   command: 'cd backend2 && pnpm run start:dev',
-  //   port: 8081
-  // },
+  gem_cars: {
+    command: 'cd backend/gem_cars && pnpm run start:dev',
+    port: 8081
+  },
   admin: {
     command: 'cd frontend/admin && pnpm run dev',
     port: 3000
@@ -156,8 +150,8 @@ program
   .action(async () => {
     await createEnvFiles();
     const setupCommands = [
+      'cd backend/auth && go get ./...',
       'cd backend/gem_cars && pnpm install',
-      // 'cd backend2 && pnpm install',
       'cd frontend/admin && pnpm install',
       'cd frontend/user && pnpm install',
       'cd frontend/shared && pnpm install',
@@ -181,8 +175,8 @@ program
   .description('Install all dependencies for each project')
   .action(async () => {
     const setupCommands = [
+      'cd backend/auth && go get ./...',
       'cd backend/gem_cars && pnpm install',
-      // 'cd backend2 && pnpm install',
       'cd frontend/admin && pnpm install',
       'cd frontend/user && pnpm install',
       'cd frontend/shared && pnpm install',
