@@ -30,6 +30,9 @@ jobs:
       - name: Check pnpm version
         run: pnpm --version
 
+      - name: List Directories
+        run: ls -l
+
       - name: Install dependencies
         run: |
           cd backend/gem_cars
