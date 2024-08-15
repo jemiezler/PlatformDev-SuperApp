@@ -3,6 +3,7 @@ package controllers
 import (
 	"context"
 	"net/http"
+	"strings"
 	"time"
 
 	"auth/config"
@@ -16,6 +17,11 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"golang.org/x/crypto/bcrypt"
 )
+
+type CustomClaims struct {
+	UserID string `json:"id"`
+	jwt.StandardClaims
+}
 
 func Register(c *gin.Context, userCollection *mongo.Collection) {
 	var user models.User
@@ -161,4 +167,49 @@ func RefreshToken(c *gin.Context, userCollection *mongo.Collection) {
 	} else {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid refresh token"})
 	}
+}
+
+func GetProfile(c *gin.Context, userCollection *mongo.Collection) {
+	authHeader := c.GetHeader("Authorization")
+	if authHeader == "" {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Authorization header missing"})
+		return
+	}
+
+	tokenString := strings.TrimPrefix(authHeader, "Bearer ")
+
+	secretKey := config.GetJWTSecret()
+
+	token, err := jwt.ParseWithClaims(tokenString, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
+		return []byte(secretKey), nil
+	})
+
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid token"})
+		return
+	}
+
+	claims, ok := token.Claims.(*CustomClaims)
+	if !ok || !token.Valid {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid token"})
+		return
+	}
+
+	userID, err := primitive.ObjectIDFromHex(claims.UserID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Invalid user ID"})
+		return
+	}
+
+	var userProfile models.Profile
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	err = userCollection.FindOne(ctx, bson.M{"_id": userID}).Decode(&userProfile)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error fetching user profile"})
+		return
+	}
+
+	c.JSON(http.StatusOK, userProfile)
 }
