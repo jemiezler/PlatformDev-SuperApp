@@ -13,6 +13,9 @@ For first time, install dependencies in root directory
 ```bash
   pnpm install
 ```
+```bash
+  pnpm link --global
+```
 
 
 ## Setting Up
