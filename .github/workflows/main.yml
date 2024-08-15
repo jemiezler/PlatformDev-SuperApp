@@ -41,9 +41,9 @@ jobs:
         run: |
           cd backend/gem_cars
           pnpm install
-          cd frontend/admin
+          cd .../frontend/admin
           pnpm install
-          cd frontend/user
+          cd ../user
           pnpm install
 
   test:
