@@ -32,7 +32,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd backend
+          cd backend/gem_cars
           pnpm install
           cd ../frontend/admin
           pnpm install
