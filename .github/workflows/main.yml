@@ -31,7 +31,11 @@ jobs:
         run: pnpm --version
 
       - name: List Directories
-        run: ls -l
+        run: |
+          ls -l
+          cd frontend
+          ls -l
+
 
       - name: Install dependencies
         run: |
