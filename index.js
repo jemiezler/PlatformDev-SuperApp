@@ -175,6 +175,31 @@ program
     });
   });
 
+// Setup command to install dependencies
+program
+  .command('install')
+  .description('Install all dependencies for each project')
+  .action(async () => {
+    const setupCommands = [
+      'cd backend/gem_cars && pnpm install',
+      // 'cd backend2 && pnpm install',
+      'cd frontend/admin && pnpm install',
+      'cd frontend/user && pnpm install',
+      'cd frontend/shared && pnpm install',
+    ];
+
+    console.log('Installing dependencies for all projects...');
+
+    setupCommands.forEach((command) => {
+      const [cmd, ...args] = command.split(' ');
+      const setupProcess = spawn(cmd, args, { stdio: 'inherit', shell: true });
+
+      setupProcess.on('error', (error) => {
+        console.error(`Error during setup: ${error.message}`);
+      });
+    });
+  });
+
 // Dev command to start services interactively
 program
   .command('dev')

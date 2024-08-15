@@ -1,0 +1,76 @@
+name: Main - Continuous Integration(CI)
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Check Node.js version
+        run: node --version
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Check pnpm version
+        run: pnpm --version
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          pnpm install
+          cd ../frontend/admin
+          pnpm install
+          cd ../user
+          pnpm install
+          cd ../shared
+          pnpm install
+
+  test:
+    needs: setup
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service:
+          - backend/gem_cars
+          - frontend/admin
+          - frontend/user
+          - frontend/shared
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Check Node.js version
+        run: node --version
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Check pnpm version
+        run: pnpm --version
+
+      - name: Install dependencies
+        run: |
+          cd ${{ matrix.service }}
+          pnpm install
