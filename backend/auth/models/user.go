@@ -18,3 +18,11 @@ type User struct {
 	Username     string             `bson:"username"`
 	Roles        []string           `bson:"roles"`
 }
+
+type Profile struct {
+	ID       primitive.ObjectID `bson:"_id,omitempty"`
+	Name     Name               `bson:"name"`
+	Email    string             `bson:"email"`
+	Username string             `bson:"username"`
+	Roles    []string           `bson:"roles"`
+}

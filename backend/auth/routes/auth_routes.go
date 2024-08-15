@@ -8,13 +8,16 @@ import (
 )
 
 func AuthRoutes(r *gin.Engine, userCollection *mongo.Collection) {
-	r.POST("/register", func(c *gin.Context) {
+	r.POST("/auth/register", func(c *gin.Context) {
 		controllers.Register(c, userCollection)
 	})
-	r.POST("/login", func(c *gin.Context) {
+	r.POST("/auth/login", func(c *gin.Context) {
 		controllers.Login(c, userCollection)
 	})
-	r.POST("/refresh", func(c *gin.Context) {
+	r.POST("/auth/refresh", func(c *gin.Context) {
 		controllers.RefreshToken(c, userCollection)
+	})
+	r.GET("/auth/profile", func(c *gin.Context) {
+		controllers.GetProfile(c, userCollection)
 	})
 }
