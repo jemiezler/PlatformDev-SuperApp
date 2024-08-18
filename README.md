@@ -3,7 +3,7 @@
 
 Before Getting Start: Install necessary tool
 - PNPM | https://pnpm.io/installation
-
+- Go CLI | https://go.dev/dl/
 
 
 ## Installation
