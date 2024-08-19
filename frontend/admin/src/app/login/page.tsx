@@ -31,10 +31,10 @@ export default function LoginPage() {
                     <div className="flex justify-center">
                         <h1>Placeholder for Logo</h1>
                     </div>
-                    <div>
-                        <h2 className="text-4xl font-semibold text-center py-8">Login</h2>
-                        <form onSubmit={handleSubmit} className="space-y-4">
-                            <label className="input input-bordered flex items-center gap-2 ">
+                    <div className="flex flex-col">
+                        <h2 className="text-4xl font-semibold text-center py-8 pb-24">Welcome Back</h2>
+                        <form onSubmit={handleSubmit} className="space-y-4 flex flex-col items-center">
+                            <label className="input w-full max-w-xs input-bordered flex items-center gap-2 rounded-full">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 16 16"
@@ -47,7 +47,7 @@ export default function LoginPage() {
                                 </svg>
                                 <input type="text" className="grow" placeholder="Email" />
                             </label>
-                            <label className="input input-bordered flex items-center gap-2 ">
+                            <label className="input w-full max-w-xs input-bordered flex items-center gap-2 rounded-full">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 16 16"
@@ -62,7 +62,7 @@ export default function LoginPage() {
                             </label>
                             <button
                                 type="submit"
-                                className="block w-full px-4 py-2 text-white bg-indigo-600 rounded-full hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                className="block w-full max-w-xs px-4 py-3 text-white bg-indigo-600 rounded-full hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             >
                                 Sign In
                             </button>
