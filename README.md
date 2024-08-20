@@ -18,6 +18,10 @@ For first time, install dependencies in root directory
 ```bash
   pnpm link --global
 ```
+```bash
+  chmod +x index.js
+```
+
 
 
 ## Setting Up
