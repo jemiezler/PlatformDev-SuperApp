@@ -16,12 +16,8 @@ For first time, install dependencies in root directory
   pnpm install
 ```
 ```bash
-  pnpm link --global
+  npm i -g .
 ```
-```bash
-  chmod +x index.js
-```
-
 
 
 ## Setting Up
