@@ -65,6 +65,9 @@ importers:
       react-native-web:
         specifier: ~0.19.10
         version: 0.19.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      user:
+        specifier: 'file:'
+        version: file:(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.2.79)(expo-modules-autolinking@1.11.1)(typescript@5.3.3)
     devDependencies:
       '@babel/core':
         specifier: ^7.20.0
@@ -4537,6 +4540,9 @@ packages:
     resolution: {integrity: sha512-QWlq8Is8BGWBf883QOEQP5HWYX/kMI+JTbJ5rdtvJLmXTIh9XoHIO3PQcmQl8BU44VKxow1kbQUHa6mQSMALDQ==}
     peerDependencies:
       react: '>=16.8'
+
+  'user@file:':
+    resolution: {directory: '', type: directory}
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
@@ -10528,6 +10534,40 @@ snapshots:
   use-latest-callback@0.2.1(react@18.2.0):
     dependencies:
       react: 18.2.0
+
+  user@file:(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.2.79)(expo-modules-autolinking@1.11.1)(typescript@5.3.3):
+    dependencies:
+      '@expo/vector-icons': 14.0.2
+      '@react-navigation/native': 6.1.18(react-native@0.74.5(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      expo: 51.0.26(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))
+      expo-constants: 16.0.2(expo@51.0.26(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
+      expo-font: 12.0.9(expo@51.0.26(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
+      expo-linking: 6.3.1(expo@51.0.26(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
+      expo-router: 3.5.21(o7vq5luquqpd3h2m7nw7jfqjvu)
+      expo-splash-screen: 0.27.5(expo-modules-autolinking@1.11.1)(expo@51.0.26(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
+      expo-status-bar: 1.12.1
+      expo-system-ui: 3.0.7(expo@51.0.26(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
+      expo-web-browser: 13.0.3(expo@51.0.26(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-native: 0.74.5(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.2.79)(react@18.2.0)
+      react-native-gesture-handler: 2.16.2(react-native@0.74.5(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react-native-reanimated: 3.10.1(@babel/core@7.25.2)(react-native@0.74.5(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react-native-safe-area-context: 4.10.5(react-native@0.74.5(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react-native-screens: 3.31.1(react-native@0.74.5(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react-native-web: 0.19.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@babel/preset-env'
+      - '@react-navigation/drawer'
+      - '@testing-library/jest-native'
+      - '@types/react'
+      - bufferutil
+      - encoding
+      - expo-modules-autolinking
+      - supports-color
+      - typescript
+      - utf-8-validate
 
   util-deprecate@1.0.2: {}
 
