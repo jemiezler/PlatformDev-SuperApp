@@ -14,10 +14,6 @@
   },
   "dependencies": {
     "@inquirer/prompts": "^5.3.8",
-    "backend/auth": "file:./backend/auth",
-    "backend/gem_cars": "file:./backend/gem_cars",
-    "frontend/admin": "file:./frontend/admin",
-    "frontend/user": "file:./frontend/user",
     "commander": "^12.1.0",
     "dotenv": "^16.4.5",
     "fs": "0.0.1-security",
