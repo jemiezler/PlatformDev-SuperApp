@@ -5,7 +5,7 @@ Before Getting Start: Install necessary tool
 - Go | https://go.dev/doc/install
 - NODEJS | https://nodejs.org/en/download/package-manager
 - PNPM | https://pnpm.io/installation
-
+- Go CLI | https://go.dev/dl/
 
 
 ## Installation
