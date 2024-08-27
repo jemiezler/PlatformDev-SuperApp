@@ -3,15 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "dotenv -c -- next dev",
+    "build": "dotenv -c -- next build",
+    "start": "dotenv -c -- next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "dotenv-cli": "^7.4.2",
     "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
     "@types/node": "^20",

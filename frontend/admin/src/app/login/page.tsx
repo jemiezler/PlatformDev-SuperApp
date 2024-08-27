@@ -1,10 +1,12 @@
 "use client";
-import { useRouter } from "next/router";
+import { useToast } from "@/context/ToastContext";
 import { useState } from "react";
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { showToast } = useToast();
+
 
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
@@ -20,9 +22,12 @@ export default function LoginPage() {
         if (email === 'user@example.com' && password === 'password') {
 
         } else {
-            alert('Invalid credentials');
+            showToast('This is a Error message!', 'error');
         }
     };
+
+
+    
 
     return (
         <div className="flex items-center justify-end min-h-screen min-w-screen">
@@ -73,7 +78,6 @@ export default function LoginPage() {
                     </div>
                 </div>
             </div>
-
         </div>
     );
 }
