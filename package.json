@@ -14,12 +14,24 @@
   },
   "dependencies": {
     "@inquirer/prompts": "^5.3.8",
+    "@types/node": "^22.5.0",
     "commander": "^12.1.0",
     "dotenv": "^16.4.5",
-    "expo": "~51.0.28",
+    "expo": "~51.0.31",
     "expo-router": "~3.5.23",
     "fs": "0.0.1-security",
     "inquirer": "8.2.5",
-    "path": "^0.12.7"
+    "moti": "^0.29.0",
+    "path": "^0.12.7",
+    "react": "^18.3.1",
+    "react-native": "^0.75.2",
+    "react-native-web": "^0.19.12",
+    "react-transition-group": "^4.4.5",
+    "typescript": "^5.5.4",
+    "webpack": "^5.94.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.4",
+    "@types/react-native-web": "^0.19.0"
   }
 }
