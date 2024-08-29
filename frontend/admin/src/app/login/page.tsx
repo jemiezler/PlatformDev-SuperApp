@@ -1,5 +1,5 @@
 "use client";
-import { useToast } from "@/context/ToastContext";
+import { useToast } from "@shared/context/ToastContext";
 import { useState } from "react";
 
 export default function LoginPage() {
