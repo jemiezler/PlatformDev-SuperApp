@@ -14,12 +14,9 @@ app.use(swagger());
 app.get("/", () => {
   const messageBuilder = new MessageBuilder("Example");
   const message = messageBuilder.build(ResponseMethod.findAll);
-  console.log("Message:", message);
-  console.log("Message Type:", typeof message);
   const response = createResponse(StatusCodes.OK, message, {
     user: "Hello Elysia",
   });
-  console.log("Response:", response);
   return response;
 });
 
