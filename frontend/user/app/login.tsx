@@ -2,8 +2,9 @@
 import React, { useState } from 'react';
 
 import { router } from 'expo-router';
-import { TextInput, Button, View, Text } from 'react-native';
 import { useSession } from '@/contexts/ctx';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Button, Card, H2, Image, Input, Paragraph, Text, View, XStack, YStack } from 'tamagui'
 
 export default function SignIn() {
   const { logIn } = useSession();
@@ -21,21 +22,33 @@ export default function SignIn() {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <TextInput
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        style={{ borderBottomWidth: 1, marginBottom: 10, width: '80%' }}
-      />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        style={{ borderBottomWidth: 1, marginBottom: 20, width: '80%' }}
-      />
-      <Button title="Sign In" onPress={handlelogIn} />
-    </View>
+    <SafeAreaView style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center', backgroundColor: 'grey', }}>
+      <View padding="$1">
+        <Card padded style={{ width: '100%', borderRadius: '24px' }}>
+          <H2 paddingBottom="20px">Get Started</H2>
+          <YStack paddingBottom="20px">
+            <Text fontWeight="700">Welcome to MFU Campus!</Text>
+            <Text >Your gateway to campus life and services.</Text>
+          </YStack>
+          <YStack gap="$2" paddingBottom="20px">
+            <Input
+              placeholder="Email"
+              value={email}
+              onChangeText={setEmail}
+              style={{ borderBottomWidth: 1 }}
+            />
+            <Input
+              placeholder="Password"
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry
+              style={{ borderBottomWidth: 1 }}
+            />
+          </YStack>
+          <Button borderRadius="$6" marginBottom="10px" onPress={handlelogIn} >Continue</Button>
+          <Button borderRadius="$6" >Continue</Button>
+        </Card>
+      </View>
+    </SafeAreaView>
   );
 }
