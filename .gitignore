@@ -123,3 +123,14 @@ packages/**/*.d.ts
 packages/**/*.js
 
 backend/library/dist
+
+*.pyc
+*.pyo
+*.pyd
+
+venv/
+.env/
+*/migrations/*
+!*/migrations/__init__.py
+*.rdb
+*.aof
