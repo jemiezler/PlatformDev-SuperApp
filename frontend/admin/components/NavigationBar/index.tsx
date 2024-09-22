@@ -1,6 +1,6 @@
-export default function NavBar() {
+export function NavBar() {
   return (
-    <div className="navbar">
+    <div className="navbar h-1 border-b bg-white/30 backdrop-blur-md">
       <div className="flex-1">
         <a className="btn btn-ghost text-xl">daisyUI</a>
       </div>
@@ -70,6 +70,64 @@ export default function NavBar() {
           </ul>
         </div>
       </div>
+    </div>
+  );
+}
+
+export function SideBar() {
+  return (
+    <div style={{ height: 'calc(100vh - 4rem)' }} className="border-r overflow-y-auto bg-white/50">
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
+      <h1>owgpreogn</h1>
     </div>
   );
 }

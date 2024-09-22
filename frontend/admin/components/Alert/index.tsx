@@ -61,7 +61,7 @@ export function Alert({
   return (
     <motion.div
       role="alert"
-      className='alert shadow-lg max-w-md'
+      className='alert shadow-lg max-w-md w-full'
       style={alertStyle}
       initial={{ opacity: 0, translateX: 100 }}
       animate={{ opacity: isExiting ? 0 : 1, translateX: isExiting ? 100 : 0 }}

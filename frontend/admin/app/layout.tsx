@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { GlobalProvider } from "@/context/GlobalContext";
 import { GlobalAlert } from "@/components/Alert";
-
+import { NavBar, SideBar } from "@/components/NavigationBar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,8 +32,20 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <GlobalProvider>
-          <GlobalAlert></GlobalAlert>
-          {children}
+          <GlobalAlert />
+          <div className="flex flex-col h-screen">
+            <div className="fixed top-0 left-0 right-0 z-10">
+              <NavBar />
+            </div>
+            <div className="flex flex-grow pt-[64px]">
+              <div className="fixed top-[64px] left-0 h-[calc(100vh-64px)] w-72 z-10">
+                <SideBar />
+              </div>
+              <main className="flex-grow ml-64 p-6 bg-base-100 overflow-y-auto">
+                {children}
+              </main>
+            </div>
+          </div>
         </GlobalProvider>
       </body>
     </html>
