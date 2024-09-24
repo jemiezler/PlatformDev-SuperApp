@@ -1,23 +1,20 @@
 "use client";
 import Button from "@/components/Button";
-import Card from "@/components/Card";
 import Modal from "@/components/Modal";
-
 import { useGlobalContext } from "@/context/GlobalContext";
-import { tAlert, tAlertType } from "@/types/Alert";
-import Image from "next/image";
+import { tAlert, tAlertType } from "@/utils/types/Alert";
 import { useState } from "react";
 
 export default function Home() {
   const { addAlert } = useGlobalContext();
-  const handleAddAlert = () => {
+  const handleAddAlert = (title: string, message: string, type: tAlertType) => {
     const newAlert: tAlert = {
-      title: "New Alert!",
-      message: "This is a new alert message.This is a new alert message.This is a new alert message.This is a new alert message.This is a new alert message.This is a new alert message.This is a new alert message.This is a new alert message.This is a new alert message.",
+      title: title,
+      message: message,
       buttonText: "X",
       iconName: "InformationCircleIcon",
-      type: tAlertType.WARNING,
-      id: "",
+      type: type,
+      id: Math.random().toString(36).substring(2, 9),
     };
     addAlert(newAlert);
   };
@@ -26,251 +23,39 @@ export default function Home() {
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
   return (
-    <div className="">
-      <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-        <button onClick={handleAddAlert}>Show Alert</button>
-        <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-          <Card>
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/next.svg"
-              alt="Next.js logo"
-              width={180}
-              height={38}
-              priority
-            />
-            <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-              <li className="mb-2">
-                Get started by editing{" "}
-                <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-                  app/page.tsx
-                </code>
-                .
-              </li>
-              <li>Save and see your changes instantly.</li>
-            </ol>
-
-            <div className="flex gap-4 items-center flex-col sm:flex-row">
-              <a
-                className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-                href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  className="dark:invert"
-                  src="https://nextjs.org/icons/vercel.svg"
-                  alt="Vercel logomark"
-                  width={20}
-                  height={20}
-                />
-                Deploy now
-              </a>
-              <a
-                className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-                href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Read our docs
-              </a>
-            </div>
-          </Card>
-          <div>
-            <button className="btn" onClick={handleOpenModal}>
-              Open Modal
-            </button>
-            <Modal
-              isOpen={isModalOpen}
-              onClose={handleCloseModal}
-              title="Hello!"
-              actions={
-                <>
-                  <Button onClick={handleCloseModal}>Submit</Button>
-                  <Button onClick={handleCloseModal}>Cancel</Button>
-                </>
-              }
-            >
-              <p>Press ESC key or click the button below to close</p>
-            </Modal>
-          </div>
-          <Card>
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/next.svg"
-              alt="Next.js logo"
-              width={180}
-              height={38}
-              priority
-            />
-            <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-              <li className="mb-2">
-                Get started by editing{" "}
-                <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-                  app/page.tsx
-                </code>
-                .
-              </li>
-              <li>Save and see your changes instantly.</li>
-            </ol>
-
-            <div className="flex gap-4 items-center flex-col sm:flex-row">
-              <a
-                className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-                href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  className="dark:invert"
-                  src="https://nextjs.org/icons/vercel.svg"
-                  alt="Vercel logomark"
-                  width={20}
-                  height={20}
-                />
-                Deploy now
-              </a>
-              <a
-                className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-                href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Read our docs
-              </a>
-            </div>
-          </Card>
-          <div>
-            <button className="btn" onClick={handleOpenModal}>
-              Open Modal
-            </button>
-            <Modal
-              isOpen={isModalOpen}
-              onClose={handleCloseModal}
-              title="Hello!"
-              actions={
-                <>
-                  <Button onClick={handleCloseModal}>Submit</Button>
-                  <Button onClick={handleCloseModal}>Cancel</Button>
-                </>
-              }
-            >
-              <p>Press ESC key or click the button below to close</p>
-            </Modal>
-          </div>
-          <Card>
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/next.svg"
-              alt="Next.js logo"
-              width={180}
-              height={38}
-              priority
-            />
-            <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-              <li className="mb-2">
-                Get started by editing{" "}
-                <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-                  app/page.tsx
-                </code>
-                .
-              </li>
-              <li>Save and see your changes instantly.</li>
-            </ol>
-
-            <div className="flex gap-4 items-center flex-col sm:flex-row">
-              <a
-                className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-                href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  className="dark:invert"
-                  src="https://nextjs.org/icons/vercel.svg"
-                  alt="Vercel logomark"
-                  width={20}
-                  height={20}
-                />
-                Deploy now
-              </a>
-              <a
-                className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-                href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Read our docs
-              </a>
-            </div>
-          </Card>
-          <div>
-            <button className="btn" onClick={handleOpenModal}>
-              Open Modal
-            </button>
-            <Modal
-              isOpen={isModalOpen}
-              onClose={handleCloseModal}
-              title="Hello!"
-              actions={
-                <>
-                  <Button onClick={handleCloseModal}>Submit</Button>
-                  <Button onClick={handleCloseModal}>Cancel</Button>
-                </>
-              }
-            >
-              <p>Press ESC key or click the button below to close</p>
-            </Modal>
-          </div>
-        </main>
-        <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-          <a
-            className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              aria-hidden
-              src="https://nextjs.org/icons/file.svg"
-              alt="File icon"
-              width={16}
-              height={16}
-            />
-            Learn
-          </a>
-          <a
-            className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              aria-hidden
-              src="https://nextjs.org/icons/window.svg"
-              alt="Window icon"
-              width={16}
-              height={16}
-            />
-            Examples
-          </a>
-          <a
-            className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-            href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              aria-hidden
-              src="https://nextjs.org/icons/globe.svg"
-              alt="Globe icon"
-              width={16}
-              height={16}
-            />
-            Go to nextjs.org →
-          </a>
-        </footer>
+    <div className="flex items-start justify-items-start gap-8">
+      {/* Alert Example */}
+      <div className="flex flex-col items-center gap-2 border border-dashed border-2 rounded p-4">
+        <h1>Alert</h1>
+        <button className="btn w-full" onClick={() => handleAddAlert("Success", "Example Message", tAlertType.SUCCESS)}>Success Alert</button>
+        <button className="btn w-full" onClick={() => handleAddAlert("Warning", "Example Message", tAlertType.WARNING)}>Warning Alert</button>
+        <button className="btn w-full" onClick={() => handleAddAlert("Error", "Example Message", tAlertType.ERROR)}>Error Alert</button>
       </div>
+
+      {/* Modal Example */}
+      <div className="flex flex-col items-center gap-2 border border-dashed border-2 rounded p-4">
+        <h1>Modal</h1>
+        <div>
+          <button className="btn" onClick={handleOpenModal}>
+            Open Modal
+          </button>
+          <Modal
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            title="Hello!"
+            actions={
+              <>
+                <Button onClick={handleCloseModal}>Submit</Button>
+                <Button onClick={handleCloseModal}>Cancel</Button>
+              </>
+            }
+          >
+            <p>click the button below to close</p>
+          </Modal>
+        </div>
+      </div>
+          
+      
     </div>
   );
 }

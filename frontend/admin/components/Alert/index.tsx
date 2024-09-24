@@ -3,7 +3,7 @@ import * as Icons from "@heroicons/react/24/outline";
 import { SVGProps, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useGlobalContext } from "@/context/GlobalContext";
-import { tAlert } from "@/types/Alert";
+import { tAlert } from "@/utils/types/Alert";
 
 interface AlertProps extends tAlert {
   onClose: () => void;

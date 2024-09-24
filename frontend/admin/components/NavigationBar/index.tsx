@@ -1,11 +1,16 @@
+"use client"
+import { useRouter } from "next/navigation";
+import * as Icons from "@heroicons/react/24/outline";
+
 export function NavBar() {
+  const router = useRouter();
   return (
-    <div className="navbar h-1 border-b bg-white/30 backdrop-blur-md">
+    <div className="navbar h-1 border-b dark:border-neutral-800 backdrop-blur-md">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="btn btn-ghost text-xl" onClick={() => router.push('/')}>University Management</a>
       </div>
       <div className="flex-none">
-        <div className="dropdown dropdown-end">
+        {/* <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             <div className="indicator">
               <svg
@@ -30,14 +35,14 @@ export function NavBar() {
             className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow"
           >
             <div className="card-body">
-              <span className="text-lg font-bold">8 Items</span>
+              <span className="text-lg font-semibold">8 Items</span>
               <span className="text-info">Subtotal: $999</span>
               <div className="card-actions">
                 <button className="btn btn-primary btn-block">View cart</button>
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="dropdown dropdown-end">
           <div
             tabIndex={0}
@@ -74,60 +79,38 @@ export function NavBar() {
   );
 }
 
-export function SideBar() {
+export function SideBar({ folders = [] }: { folders: string[] }) {
+  const router = useRouter();
+  type IconNames = keyof typeof Icons;
   return (
-    <div style={{ height: 'calc(100vh - 4rem)' }} className="border-r overflow-y-auto bg-white/50">
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
-      <h1>owgpreogn</h1>
+    <div style={{ height: 'calc(100vh - 4rem)' }} className="menu border-r dark:border-neutral-800 backdrop-blur-md overflow-y-auto">
+      <div className="text-2xl font-semibold py-4 mx-4">Menu</div>
+      <ul  className="font-medium">
+        <li>
+          <a onClick={() => router.push('/')}>
+            <div className="p-2 border rounded-full"><Icons.HomeIcon width={20} strokeWidth={1.5} /></div> Home
+          </a>
+        </li>
+        {folders.length > 0 ? (
+          folders.map((folder) => {
+            // Capitalize the first letter for display
+            const capitalizedFolder = folder.charAt(0).toUpperCase() + folder.slice(1);
+            const iconName = `${capitalizedFolder}Icon` as IconNames; // Cast to IconNames
+            const IconComponent = Icons[iconName]; // Access the icon
+
+            return (
+              <li key={folder}>
+                <a onClick={() => router.push(`/${folder}`)}>
+                  <div className="p-2 border rounded-full">{IconComponent ? <IconComponent width={20} strokeWidth={1.5} /> : <Icons.EllipsisVerticalIcon width={20} strokeWidth={1.5} />}</div>
+                  {capitalizedFolder} {/* Display folder name */}
+                </a>
+              </li>
+            );
+          })
+        ) : (
+          <li>No folders available</li>
+        )}
+      </ul>
     </div>
   );
 }

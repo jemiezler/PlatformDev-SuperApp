@@ -1,6 +1,6 @@
 "use client";
 
-import { tAlert } from "@/types/Alert";
+import { tAlert } from "@/utils/types/Alert";
 import React, { createContext, useContext, useState } from "react";
 
 interface GlobalContextType {

@@ -1,20 +1,12 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Urbanist } from 'next/font/google'
 import "./globals.css";
 import { GlobalProvider } from "@/context/GlobalContext";
 import { GlobalAlert } from "@/components/Alert";
 import { NavBar, SideBar } from "@/components/NavigationBar";
+import { getFolders } from "@/utils/common/getFolders";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+const urbanist = Urbanist({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,22 +18,24 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const folders = getFolders();
+
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`antialiased`}
       >
         <GlobalProvider>
           <GlobalAlert />
-          <div className="flex flex-col h-screen">
+          <div className={`${urbanist.className} flex flex-col h-full min-h-screen`}>
             <div className="fixed top-0 left-0 right-0 z-10">
               <NavBar />
             </div>
             <div className="flex flex-grow pt-[64px]">
               <div className="fixed top-[64px] left-0 h-[calc(100vh-64px)] w-72 z-10">
-                <SideBar />
+                <SideBar folders={folders} />
               </div>
-              <main className="flex-grow ml-64 p-6 bg-base-100 overflow-y-auto">
+              <main className={`flex-grow ml-72 p-6 overflow-y-auto`}>
                 {children}
               </main>
             </div>
