@@ -1,5 +1,5 @@
 "use client"
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import * as Icons from "@heroicons/react/24/outline";
 
 export function NavBar() {
@@ -80,14 +80,16 @@ export function NavBar() {
 }
 
 export function SideBar({ folders = [] }: { folders: string[] }) {
-  const router = useRouter();
+  const pathname = usePathname(); // Get the current pathname
+
   type IconNames = keyof typeof Icons;
+
   return (
     <div style={{ height: 'calc(100vh - 4rem)' }} className="menu border-r dark:border-neutral-800 backdrop-blur-md overflow-y-auto">
       <div className="text-2xl font-semibold py-4 mx-4">Menu</div>
-      <ul  className="font-medium">
+      <ul className="font-medium">
         <li>
-          <a onClick={() => router.push('/')}>
+          <a href="/" className={pathname === '/' ? 'active' : ''}>
             <div className="p-2 border rounded-full"><Icons.HomeIcon width={20} strokeWidth={1.5} /></div> Home
           </a>
         </li>
@@ -100,8 +102,13 @@ export function SideBar({ folders = [] }: { folders: string[] }) {
 
             return (
               <li key={folder}>
-                <a onClick={() => router.push(`/${folder}`)}>
-                  <div className="p-2 border rounded-full">{IconComponent ? <IconComponent width={20} strokeWidth={1.5} /> : <Icons.EllipsisVerticalIcon width={20} strokeWidth={1.5} />}</div>
+                <a
+                  href={`/${folder}`} // Use href for navigation
+                  className={pathname === `/${folder}` ? 'active' : ''}
+                >
+                  <div className="p-2 border rounded-full">
+                    {IconComponent ? <IconComponent width={20} strokeWidth={1.5} /> : <Icons.EllipsisVerticalIcon width={20} strokeWidth={1.5} />}
+                  </div>
                   {capitalizedFolder} {/* Display folder name */}
                 </a>
               </li>
