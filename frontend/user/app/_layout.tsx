@@ -17,6 +17,5 @@ export default function Root() {
         </SessionProvider>
       </ThemeProvider>
     </TamaguiProvider>
-
   );
 }

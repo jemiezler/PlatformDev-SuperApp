@@ -11,6 +11,7 @@ export default function SignIn() {
   const [open, setOpen] = useState(true);
   const [modal, setModal] = useState(true);
 
+
   const handlelogIn = async () => {
     try {
       await logIn(email, password);
