@@ -123,3 +123,5 @@ packages/**/*.d.ts
 packages/**/*.js
 
 backend/library/dist
+
+*.pyc

@@ -60,9 +60,6 @@ importers:
       '@types/react':
         specifier: ^18.3.4
         version: 18.3.4
-      '@types/react-native-web':
-        specifier: ^0.19.0
-        version: 0.19.0(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(react@18.3.1)(typescript@5.5.4)
 
 packages:
 
@@ -1359,9 +1356,6 @@ packages:
 
   '@types/prop-types@15.7.12':
     resolution: {integrity: sha512-5zvhXYtRNRluoE/jAp4GVsSduVUzNWKkOZrCDBWYtE7biZywwdC2AcEzg+cSMLFRfVgeAFqpfNabiPjxFddV1Q==}
-
-  '@types/react-native-web@0.19.0':
-    resolution: {integrity: sha512-HWagkGzM/k1iPBy2/xnVU9U0MN9oswZu8/2buh8bnuhwJpgt7avPoGlqT9XuFNlBbQykCg5TfEyXoUJR8tGDGg==}
 
   '@types/react@18.3.4':
     resolution: {integrity: sha512-J7W30FTdfCxDDjmfRM+/JqLHBIyl7xUIp9kwK637FGmY7+mkSFSe6L4jpZzhj5QMfLssSDP4/i75AKkrdC7/Jw==}
@@ -6729,20 +6723,6 @@ snapshots:
       undici-types: 6.19.8
 
   '@types/prop-types@15.7.12': {}
-
-  '@types/react-native-web@0.19.0(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(react@18.3.1)(typescript@5.5.4)':
-    dependencies:
-      '@types/react': 18.3.4
-      react-native: 0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.4)(react@18.3.1)(typescript@5.5.4)
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@babel/preset-env'
-      - bufferutil
-      - encoding
-      - react
-      - supports-color
-      - typescript
-      - utf-8-validate
 
   '@types/react@18.3.4':
     dependencies:
