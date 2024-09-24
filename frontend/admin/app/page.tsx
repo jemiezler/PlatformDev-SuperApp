@@ -27,7 +27,7 @@ export default function Home() {
       {/* Alert Example */}
       <div className="flex flex-col items-center gap-2 border border-dashed border-2 rounded p-4">
         <h1>Alert</h1>
-        <button className="btn w-full" onClick={() => handleAddAlert("Success", "Example Message", tAlertType.SUCCESS)}>Success Alert</button>
+        <button className="btn w-full" onClick={() => handleAddAlert("Success", "Example MessageExample MessageExample MessageExample MessageExample MessageExample MessageExample Message", tAlertType.SUCCESS)}>Success Alert</button>
         <button className="btn w-full" onClick={() => handleAddAlert("Warning", "Example Message", tAlertType.WARNING)}>Warning Alert</button>
         <button className="btn w-full" onClick={() => handleAddAlert("Error", "Example Message", tAlertType.ERROR)}>Error Alert</button>
       </div>
