@@ -27,6 +27,7 @@
     "react-native": "^0.75.2",
     "react-native-web": "^0.19.12",
     "react-transition-group": "^4.4.5",
+    "superapp": "file:",
     "typescript": "^5.5.4",
     "webpack": "^5.94.0"
   },
