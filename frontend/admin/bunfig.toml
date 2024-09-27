@@ -1,0 +1,13 @@
+name = "admin-frontend"
+version = "1.0.0"
+private = true
+
+[workspaces]
+packages = [
+  "library",
+  "main",
+  "shared"
+]
+
+[scripts]
+build = "tsc -b library main shared"
