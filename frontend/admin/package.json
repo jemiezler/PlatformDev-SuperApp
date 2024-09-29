@@ -1,11 +1,31 @@
 {
-  "name": "admin",
-  "module": "index.ts",
-  "type": "module",
+  "name": "repo",
+  "version": "1.0.0",
+  "packageManager": "bun@latest",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint"
+  },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/react": "^18.3.10",
+    "turbo": "^2.1.2"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.1.5",
+    "daisyui": "^4.12.10",
+    "next": "^14.2.13",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "repo": "file:",
+    "tailwindcss": "^3.4.13"
   }
 }
