@@ -1,14 +1,15 @@
 {
     "compilerOptions": {
       "target": "ESNext", // or esnext
-      "module": "ESNext", // or esnext, depending on your setup
+      "module": "ESNext",
+      "moduleResolution":"Node", // or esnext, depending on your setup
       "jsx": "preserve",
       "allowSyntheticDefaultImports":true, // Use "react-jsx" for React 17+
       "composite": true,
       "paths": {
         "@shared/*": ["./packages/shared/*"],
-        "@app-one/*": ["./apps/app-one/*"],
-        "@app-two/*": ["./apps/app-two/*"]
+        "@main/*": ["./apps/main/*"],
+        "@library/*": ["./apps/library/*"]
       }
     },
     "include": [
