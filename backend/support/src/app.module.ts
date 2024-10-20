@@ -20,7 +20,7 @@ import { EscalationsModule } from './escalations/escalations.module';
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('MONGODB_URI'),
+        uri: configService.get<string>('MONGODB_URI') + '/support_db',
       }),
       inject: [ConfigService],
     }),
