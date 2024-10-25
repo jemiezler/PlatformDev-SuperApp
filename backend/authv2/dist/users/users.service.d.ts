@@ -5,4 +5,5 @@ export declare class UsersService {
     private userModel;
     constructor(userModel: Model<User>);
     create(createUserDto: CreateUserDto): Promise<User>;
+    findByUserId(userId: string): Promise<User>;
 }

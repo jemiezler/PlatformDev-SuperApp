@@ -7,7 +7,6 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { Public } from './decorators/public.decorator';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { UsersService } from 'src/users/users.service';
 import { UserEntity } from 'src/users/entities/user.entity';
@@ -16,6 +15,10 @@ import {
   ResponseBuilder,
   ResponseMethod,
 } from 'src/app/common/utils/response.util';
+import { LoginDto } from './dto/login.dto';
+import { Roles } from 'src/app/decorators/roles.decorator';
+import { UserRole } from 'src/app/types/user';
+import { Public } from 'src/app/decorators/public.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -25,7 +28,7 @@ export class AuthController {
     private readonly usersService: UsersService,
   ) {}
 
-  @Public()
+  @Roles(UserRole.ADMIN)
   @UseInterceptors(ClassSerializerInterceptor)
   @Post('register')
   async register(@Body() createUserDto: CreateUserDto) {
@@ -35,5 +38,15 @@ export class AuthController {
       this.messageBuilder.build(ResponseMethod.create),
       new UserEntity(user),
     );
+  }
+
+  @Public()
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Post('login')
+  async login(@Body() loginDto: LoginDto) {
+    const token = await this.authService.login(loginDto);
+    return ResponseBuilder(HttpStatus.OK, 'OK', {
+      token,
+    });
   }
 }

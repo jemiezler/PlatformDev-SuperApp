@@ -15,6 +15,8 @@ const app_service_1 = require("./app.service");
 const users_module_1 = require("./users/users.module");
 const auth_module_1 = require("./auth/auth.module");
 const configuration_1 = require("./app/config/configuration");
+const core_1 = require("@nestjs/core");
+const roles_guard_1 = require("./app/common/guards/roles.guard");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -37,7 +39,7 @@ exports.AppModule = AppModule = __decorate([
             auth_module_1.AuthModule,
         ],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [{ provide: core_1.APP_GUARD, useClass: roles_guard_1.RolesGuard }, app_service_1.AppService],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
 import { InjectModel } from '@nestjs/mongoose';
@@ -20,5 +20,13 @@ export class UsersService {
     });
 
     return (await user.save()).toObject();
+  }
+
+  async findByUserId(userId: string): Promise<User> {
+    const user = await this.userModel.findOne({ userId });
+    if (!user) {
+      throw new NotFoundException(`User with studentId ${userId} not found`);
+    }
+    return user;
   }
 }

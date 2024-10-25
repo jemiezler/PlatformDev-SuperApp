@@ -33,6 +33,13 @@ let UsersService = class UsersService {
         });
         return (await user.save()).toObject();
     }
+    async findByUserId(userId) {
+        const user = await this.userModel.findOne({ userId });
+        if (!user) {
+            throw new common_1.NotFoundException(`User with studentId ${userId} not found`);
+        }
+        return user;
+    }
 };
 exports.UsersService = UsersService;
 exports.UsersService = UsersService = __decorate([
