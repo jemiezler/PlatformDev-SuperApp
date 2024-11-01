@@ -8,39 +8,58 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
-const users_service_1 = require("../users/users.service");
 const bcrypt = require("bcrypt");
-const jwt_1 = require("@nestjs/jwt");
+const mongoose_1 = require("@nestjs/mongoose");
+const user_schema_1 = require("../user/schema/user.schema");
+const mongoose_2 = require("mongoose");
+const access_token_service_1 = require("./token/access-token.service");
+const refresh_token_service_1 = require("./token/refresh-token.service");
 let AuthService = class AuthService {
-    constructor(usersService, jwtService) {
-        this.usersService = usersService;
-        this.jwtService = jwtService;
+    constructor(accessTokenService, refreshTokenService, userModel) {
+        this.accessTokenService = accessTokenService;
+        this.refreshTokenService = refreshTokenService;
+        this.userModel = userModel;
+    }
+    async generateToken(user) {
+        const accessToken = await this.accessTokenService.generate({
+            id: user._id.toString(),
+            username: user.username,
+            role: user.role,
+        });
+        const refreshToken = await this.refreshTokenService.generate({
+            token: accessToken,
+            id: user._id.toString(),
+        });
+        return { accessToken, refreshToken };
     }
     async login(loginDto) {
-        const { password } = loginDto;
-        const user = await this.usersService.findByUserId(loginDto.userId);
-        const isPasswordCorrect = await bcrypt.compare(password, user.password);
-        if (!user || !isPasswordCorrect) {
-            throw new common_1.UnauthorizedException('Invalid credentials');
+        const { username, password } = loginDto;
+        const user = await this.userModel.findOne({ username }, { password: true, username: true, refreshToken: true, role: true });
+        if (!user || !user.password || !user.refreshToken) {
+            throw new common_1.UnauthorizedException('Invalid user credentials');
         }
-        const payload = { id: user.id, role: user.role };
-        const token = this.jwtService.sign(payload, { expiresIn: '15m' });
-        const refreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
+        const isPasswordCorrect = await bcrypt.compare(password, user.password);
+        if (!isPasswordCorrect) {
+            throw new common_1.UnauthorizedException('Invalid user credentials');
+        }
+        const { accessToken, refreshToken } = await this.generateToken(user);
         user.refreshToken = refreshToken;
         await user.save();
-        return {
-            token,
-            refreshToken,
-        };
+        return { accessToken, refreshToken };
     }
 };
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [users_service_1.UsersService,
-        jwt_1.JwtService])
+    __param(2, (0, mongoose_1.InjectModel)(user_schema_1.User.name)),
+    __metadata("design:paramtypes", [access_token_service_1.AccessTokenService,
+        refresh_token_service_1.RefreshTokenService,
+        mongoose_2.Model])
 ], AuthService);
 //# sourceMappingURL=auth.service.js.map

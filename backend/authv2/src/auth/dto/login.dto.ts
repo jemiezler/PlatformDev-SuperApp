@@ -1,9 +1,16 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional, IsIn } from 'class-validator';
+import { UserRole } from 'src/user/interface/user.interface';
 
 export class LoginDto {
+  @IsString()
   @IsNotEmpty()
-  userId: string;
+  username: string;
 
+  @IsString()
   @IsNotEmpty()
   password: string;
+
+  @IsOptional()
+  @IsIn(Object.values(UserRole))
+  role: UserRole;
 }

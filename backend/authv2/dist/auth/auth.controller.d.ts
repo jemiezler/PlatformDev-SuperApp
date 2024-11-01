@@ -1,18 +1,7 @@
 import { AuthService } from './auth.service';
-import { CreateUserDto } from 'src/users/dto/create-user.dto';
-import { UsersService } from 'src/users/users.service';
-import { UserEntity } from 'src/users/entities/user.entity';
 import { LoginDto } from './dto/login.dto';
 export declare class AuthController {
     private readonly authService;
-    private readonly usersService;
-    private readonly messageBuilder;
-    constructor(authService: AuthService, usersService: UsersService);
-    register(createUserDto: CreateUserDto): Promise<import("src/app/common/utils/response.util").ResponseDto<UserEntity>>;
-    login(loginDto: LoginDto): Promise<import("src/app/common/utils/response.util").ResponseDto<{
-        token: {
-            token: string;
-            refreshToken: string;
-        };
-    }>>;
+    constructor(authService: AuthService);
+    login(loginDto: LoginDto): Promise<import("src/app/common/utils/response.util").ResponseDto<import("./interfaces/login.interface").Tokens>>;
 }

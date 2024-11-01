@@ -1,4 +1,6 @@
+import { UserRole } from 'src/user/interface/user.interface';
 export declare class LoginDto {
-    userId: string;
+    username: string;
     password: string;
+    role: UserRole;
 }

@@ -15,44 +15,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
-const create_user_dto_1 = require("../users/dto/create-user.dto");
-const users_service_1 = require("../users/users.service");
-const user_entity_1 = require("../users/entities/user.entity");
-const response_util_1 = require("../app/common/utils/response.util");
 const login_dto_1 = require("./dto/login.dto");
-const roles_decorator_1 = require("../app/decorators/roles.decorator");
-const user_1 = require("../app/types/user");
-const public_decorator_1 = require("../app/decorators/public.decorator");
+const response_util_1 = require("../app/common/utils/response.util");
 let AuthController = class AuthController {
-    constructor(authService, usersService) {
+    constructor(authService) {
         this.authService = authService;
-        this.usersService = usersService;
-        this.messageBuilder = new response_util_1.MessageBuilder('User');
-    }
-    async register(createUserDto) {
-        const user = await this.usersService.create(createUserDto);
-        return (0, response_util_1.ResponseBuilder)(common_1.HttpStatus.CREATED, this.messageBuilder.build(response_util_1.ResponseMethod.create), new user_entity_1.UserEntity(user));
     }
     async login(loginDto) {
-        const token = await this.authService.login(loginDto);
-        return (0, response_util_1.ResponseBuilder)(common_1.HttpStatus.OK, 'OK', {
-            token,
-        });
+        const response = await this.authService.login(loginDto);
+        return (0, response_util_1.ResponseBuilder)(common_1.HttpStatus.OK, 'Login user successful', response);
     }
 };
 exports.AuthController = AuthController;
 __decorate([
-    (0, roles_decorator_1.Roles)(user_1.UserRole.ADMIN),
-    (0, common_1.UseInterceptors)(common_1.ClassSerializerInterceptor),
-    (0, common_1.Post)('register'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
-    __metadata("design:returntype", Promise)
-], AuthController.prototype, "register", null);
-__decorate([
-    (0, public_decorator_1.Public)(),
-    (0, common_1.UseInterceptors)(common_1.ClassSerializerInterceptor),
     (0, common_1.Post)('login'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -61,7 +36,6 @@ __decorate([
 ], AuthController.prototype, "login", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth'),
-    __metadata("design:paramtypes", [auth_service_1.AuthService,
-        users_service_1.UsersService])
+    __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], AuthController);
 //# sourceMappingURL=auth.controller.js.map

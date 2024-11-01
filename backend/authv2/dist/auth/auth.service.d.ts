@@ -1,12 +1,14 @@
-import { UsersService } from '../users/users.service';
 import { LoginDto } from './dto/login.dto';
-import { JwtService } from '@nestjs/jwt';
+import { Tokens } from './interfaces/login.interface';
+import { User, UserDocument } from 'src/user/schema/user.schema';
+import { Model } from 'mongoose';
+import { AccessTokenService } from './token/access-token.service';
+import { RefreshTokenService } from './token/refresh-token.service';
 export declare class AuthService {
-    private usersService;
-    private jwtService;
-    constructor(usersService: UsersService, jwtService: JwtService);
-    login(loginDto: LoginDto): Promise<{
-        token: string;
-        refreshToken: string;
-    }>;
+    private readonly accessTokenService;
+    private readonly refreshTokenService;
+    private readonly userModel;
+    constructor(accessTokenService: AccessTokenService, refreshTokenService: RefreshTokenService, userModel: Model<User>);
+    generateToken(user: UserDocument): Promise<Tokens>;
+    login(loginDto: LoginDto): Promise<Tokens>;
 }

@@ -3,11 +3,11 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 import configuration from './app/config/configuration';
-import { APP_GUARD } from '@nestjs/core';
-import { RolesGuard } from './app/common/guards/roles.guard';
+import { AccessTokenModule } from './auth/token/access-token.module';
+import { RefreshTokenModule } from './auth/token/refresh-token.module';
 
 @Module({
   imports: [
@@ -23,11 +23,13 @@ import { RolesGuard } from './app/common/guards/roles.guard';
       }),
       inject: [ConfigService],
     }),
-    UsersModule,
     AuthModule,
+    UserModule,
+    AccessTokenModule,
+    RefreshTokenModule,
   ],
 
   controllers: [AppController],
-  providers: [{ provide: APP_GUARD, useClass: RolesGuard }, AppService],
+  providers: [AppService],
 })
 export class AppModule {}
