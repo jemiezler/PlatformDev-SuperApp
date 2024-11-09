@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+
 const { spawn } = require('child_process');
 const { Command } = require('commander');
 const inquirer = require('inquirer');
@@ -132,7 +133,7 @@ const services = {
   },
   library: {
     command: 'cd backend/library && pnpm run start:dev',
-    port: 8081
+    port: 8082
   },
   admin: {
     command: 'cd frontend/admin && pnpm run dev',
